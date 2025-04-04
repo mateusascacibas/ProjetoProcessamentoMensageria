@@ -127,11 +127,13 @@ cd ProjetoProcessamento
 ./mvnw spring-boot:run
 
 ## 🔮 Melhorias Futuras
- Integração com RabbitMQ ou Kafka
- Persistência dos pedidos em banco de dados (PostgreSQL ou MySQL)
- Documentação OpenAPI (Swagger)
- Interface frontend com Vue.js ou React
+```bash
+Integração com RabbitMQ ou Kafka
+Persistência dos pedidos em banco de dados (PostgreSQL ou MySQL)
+Documentação OpenAPI (Swagger)
+Interface frontend com Vue.js ou React
+```
 
 👨‍💻 Autor
-Desenvolvido com 💙 por Mateus
+Desenvolvido com 💙 por Mateus Ascacibas
 📫 LinkedIn (https://www.linkedin.com/in/mateus-ascacibas/)
