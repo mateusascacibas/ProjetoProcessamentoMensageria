@@ -134,6 +134,8 @@ Documentação OpenAPI (Swagger)
 Interface frontend com Vue.js ou React
 ```
 
-👨‍💻 Autor
-Desenvolvido com 💙 por Mateus Ascacibas
+## 👨‍💻 Autor
+```bash
+Desenvolvido por Mateus Ascacibas
 📫 LinkedIn (https://www.linkedin.com/in/mateus-ascacibas/)
+```
