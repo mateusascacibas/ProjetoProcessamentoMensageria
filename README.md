@@ -57,86 +57,66 @@ src/main/java
     ├── service                       # Lógica de negócios do pedido
     │   └── PedidoService.java
     └── ProjetoProcessamentoApplication.java
+```
 
-🔁 Fluxo de Funcionamento
+## 🔁 Fluxo de Funcionamento
+
+```bash
 ✅ Você envia um pedido via endpoint REST (POST /pedidos)
-
 🔐 Endpoint exige token JWT gerado via fluxo OAuth2 Client Credentials
-
 📥 Pedido é validado e enfileirado (via FilaMensagens)
-
 ⏳ Um PedidoConsumer roda em segundo plano e processa os pedidos da fila
-
 🧾 Logs no console mostram a simulação do processamento
+```
 
-🔐 Segurança: OAuth2 + JWT
+## 🔐 Segurança: OAuth2 + JWT
 Este projeto usa o Spring Authorization Server embutido na mesma aplicação.
 
-🎫 Gerando um Token JWT
+## 🎫 Gerando um Token JWT
 Faça uma requisição para /oauth2/token:
 
-bash
-Copiar
-Editar
+```bash
 curl --location 'http://localhost:8080/oauth2/token' \
 --header 'Authorization: Basic bWF0ZXVzLWNsaWVudDoxMjM0' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'grant_type=client_credentials' \
 --data-urlencode 'scope=read'
+```
 🟢 Retorno esperado:
 
-json
-Copiar
-Editar
+```bash
 {
   "access_token": "eyJraWQiOiJ...jwt...token...",
   "token_type": "Bearer",
   "expires_in": 3600,
   "scope": "read"
 }
-🔒 Endpoint Protegido
+```
+
+## 🔒 Endpoint Protegido
 Use o token recebido acima para fazer requisições ao endpoint /pedidos:
 
-bash
-Copiar
-Editar
+```bash
 curl --location 'http://localhost:8080/pedidos' \
 --header 'Authorization: Bearer SEU_TOKEN_AQUI' \
 --header 'Content-Type: application/json' \
 --data '{
-  "cliente": "Dayelle",
+  "cliente": "Teste",
   "itens": [
-    { "nome": "Mouse", "quantidade": 1 }
+    { "nome": "Produto Teste", "quantidade": 1 }
   ]
 }'
-📂 Imagens do Projeto
-🏗️ Estrutura da Aplicação
+```
 
-📤 Obtenção do Token via Postman
-
-📦 Envio de Pedido com Token JWT
-
-🧪 Payload da Requisição
-
-📄 application.properties
-properties
-Copiar
-Editar
-spring.application.name=ProjetoProcessamento
-
-# Ativando a validação do token JWT
-spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8080
-🧪 Exemplo de Logs
-bash
-Copiar
-Editar
+## 🧪 Exemplo de Logs
+```bash
 ⏳ Aguardando pedidos...
-📥 Pedido enviado para a fila: Matheus
-✅ Pedido processado para cliente: Matheus
-🚀 Como Rodar Localmente
-bash
-Copiar
-Editar
+📥 Pedido enviado para a fila: Teste
+✅ Pedido processado para cliente: Teste
+```
+
+## 🚀 Como Rodar Localmente
+
 # Clonar o repositório
 git clone [https://github.com/seu-usuario/ProjetoProcessamento.git](https://github.com/mateusascacibas/ProjetoProcessamentoMensageria.git)
 
