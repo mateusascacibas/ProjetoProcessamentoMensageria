@@ -138,7 +138,7 @@ bash
 Copiar
 Editar
 # Clonar o repositório
-git clone https://github.com/seu-usuario/ProjetoProcessamento.git
+git clone [https://github.com/seu-usuario/ProjetoProcessamento.git](https://github.com/mateusascacibas/ProjetoProcessamentoMensageria.git)
 
 # Entrar no projeto
 cd ProjetoProcessamento
