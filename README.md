@@ -77,7 +77,7 @@ Faça uma requisição para /oauth2/token:
 
 ```bash
 curl --location 'http://localhost:8080/oauth2/token' \
---header 'Authorization: Basic bWF0ZXVzLWNsaWVudDoxMjM0' \
+--header 'Authorization: Basic bWF0ZXVzLWNsaWVudDpzZW5oYQ==' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'grant_type=client_credentials' \
 --data-urlencode 'scope=read'
