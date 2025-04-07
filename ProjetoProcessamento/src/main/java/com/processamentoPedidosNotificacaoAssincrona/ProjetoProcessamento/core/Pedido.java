@@ -1,11 +1,12 @@
 package com.processamentoPedidosNotificacaoAssincrona.ProjetoProcessamento.core;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements Serializable {
 	private String cliente;
 	private List<ItemPedido> itens;
-	
+
 	public Pedido(String cliente, List<ItemPedido> itens) {
 		this.setCliente(cliente);
 		this.setItens(itens);
