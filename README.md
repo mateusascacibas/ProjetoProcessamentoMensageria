@@ -14,6 +14,7 @@
 - ✅ **RabbitMQ (via Docker)**
 - ✅ **PostgreSQL (via Docker)**
 - ✅ **JPA / Hibernate**
+- ✅ **Swagger / OpenAPI**
 - ✅ **Jakarta**
 - ✅ **Maven**
 - ✅ **Postman** (para testes)
@@ -100,13 +101,22 @@ curl --location 'http://localhost:8080/pedidos' \
 --header 'Authorization: Bearer SEU_TOKEN_AQUI' \
 --header 'Content-Type: application/json' \
 --data '{
-  "cliente": "Matheus",
+  "cliente": "Mateus",
   "itens": [
     { "nome": "Mouse", "quantidade": 1 },
     { "nome": "Teclado", "quantidade": 2 }
   ]
 }'
 ```
+
+---
+
+## 📚 Documentação com Swagger
+
+O Swagger está disponível automaticamente ao rodar a aplicação.
+
+- Acesse via navegador: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- Toda a API está documentada com schemas de entrada e saída
 
 ---
 
@@ -136,7 +146,78 @@ docker run -d \
   rabbitmq:3-management
 ```
 
-Acesse: http://localhost:15672 (usuário: guest / senha: guest)
+Acesse: [http://localhost:15672](http://localhost:15672) (usuário: guest / senha: guest)
+
+---
+
+## 🧪 Testes Unitários
+
+O projeto inclui testes unitários com `@WebMvcTest` e `Mockito` para garantir o comportamento correto dos endpoints REST e regras de negócio.
+
+Para executar:
+
+```bash
+./mvnw test
+```
+
+---
+
+## 🐳 Dockerfile + Docker Compose
+
+Crie a imagem da aplicação com o seguinte `Dockerfile`:
+
+```dockerfile
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+COPY target/ProjetoProcessamento-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+
+E o `docker-compose.yml`:
+
+```yaml
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/processamento
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_RABBITMQ_HOST: rabbitmq
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: processamento
+      POSTGRES_PASSWORD: admin
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+```
+
+Para subir tudo:
+
+```bash
+docker-compose up --build
+```
 
 ---
 
@@ -144,8 +225,8 @@ Acesse: http://localhost:15672 (usuário: guest / senha: guest)
 
 ```bash
 ⏳ Aguardando pedidos...
-📥 Pedido enviado para a fila: Matheus
-✅ Pedido processado via RabbitMQ: Matheus
+📥 Pedido enviado para a fila: Mateus
+✅ Pedido processado via RabbitMQ: Mateus
 ```
 
 ---
@@ -159,10 +240,10 @@ git clone https://github.com/mateusascacibas/ProjetoProcessamentoMensageria.git
 # Entrar no projeto
 cd ProjetoProcessamento
 
-# Subir PostgreSQL e RabbitMQ via Docker (se ainda não fez)
-# Ver comandos acima
+# Subir tudo com Docker
+docker-compose up --build
 
-# Rodar a aplicação
+# Ou rodar manualmente (se quiser)
 ./mvnw spring-boot:run
 ```
 
@@ -170,7 +251,6 @@ cd ProjetoProcessamento
 
 ## 🔮 Melhorias Futuras
 
-- [ ] Documentação com Swagger / OpenAPI
 - [ ] Interface frontend com Angular ou React
 - [ ] Fila de Dead Letter (DLQ)
 - [ ] Emails de notificação ao cliente
