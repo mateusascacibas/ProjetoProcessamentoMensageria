@@ -1,7 +1,13 @@
 package com.processamentoPedidosNotificacaoAssincrona.ProjetoProcessamento.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class ItemDTO {
+	@NotBlank(message = "Nome do item é obrigatório")
 	private String nome;
+	
+	@Min(value = 1, message = "Quantidade deve ser no mínimo 1")
 	private int quantidade;
 	
 	public ItemDTO(String nome, int quantidade) {
