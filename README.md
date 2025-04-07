@@ -94,7 +94,7 @@ curl --location 'http://localhost:8080/oauth2/token' \
 --data-urlencode 'scope=read'
 ```
 
-### 🔒 Acesso ao endpoint protegido
+### 🔒 Acesso ao endpoint protegido para criar pedidos
 
 ```bash
 curl --location 'http://localhost:8080/pedidos' \
@@ -107,6 +107,11 @@ curl --location 'http://localhost:8080/pedidos' \
     { "nome": "Teclado", "quantidade": 2 }
   ]
 }'
+```
+### Listar pedidos
+```bash
+curl --location 'http://localhost:8080/pedidos' \
+--header 'Authorization: Bearer SEU_TOKEN_AQUI'
 ```
 
 ---
