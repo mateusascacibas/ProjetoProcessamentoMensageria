@@ -100,7 +100,7 @@ curl --location 'http://localhost:8080/pedidos' \
 --header 'Authorization: Bearer SEU_TOKEN_AQUI' \
 --header 'Content-Type: application/json' \
 --data '{
-  "cliente": "Matheus",
+  "cliente": "Mateus",
   "itens": [
     { "nome": "Mouse", "quantidade": 1 },
     { "nome": "Teclado", "quantidade": 2 }
@@ -144,8 +144,8 @@ Acesse: http://localhost:15672 (usuário: guest / senha: guest)
 
 ```bash
 ⏳ Aguardando pedidos...
-📥 Pedido enviado para a fila: Matheus
-✅ Pedido processado via RabbitMQ: Matheus
+📥 Pedido enviado para a fila: Mateus
+✅ Pedido processado via RabbitMQ: Mateus
 ```
 
 ---
